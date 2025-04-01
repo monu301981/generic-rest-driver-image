@@ -42,3 +42,4 @@ CMD cron && tail -F /var/log/cron.log 2>&1
 
 # docker build -t my-python-image .
 # docker run -v .:/app my-python-image
+# https://github.com/adiii717/docker-python-cronjob/tree/master
