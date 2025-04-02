@@ -1,5 +1,7 @@
 FROM python:3.10
 
+RUN pip install requests
+
 RUN apt-get update && apt-get -y install cron vim
 
 WORKDIR /app
@@ -24,7 +26,8 @@ RUN ln -sf /dev/stdout /var/log/cron.log
 # CMD cron && tail -F /var/log/cron.log 2>&1
 
 # run crond as main process of container
-CMD ["cron", "-f"]
+# CMD ["cron", "-f"]
+CMD ["python", "-u", "pingapi.py"]
 
 # docker build -t my-python-image .
 # docker run -v .:/app my-python-image

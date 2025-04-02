@@ -1,16 +1,23 @@
 import json
 import requests
-
-url = "https://reqres.in/api/users?page=2"
-my_headers = {
-    'Authorization': 'XXXXX',
-}
-data = { 
-    "q": {
-        "name": {
-            "eq": "0aslam0"
-        }
-    }
-}
-r = requests.get(url, headers=my_headers, json=data)
-print(r)
+import time
+  
+with open('config.json', 'r') as json_file:
+  data = json.load(json_file);
+  #print(requests)
+for request in data["requests"]:
+  print(request['id'])
+  
+print("App started")
+i = 1
+while True:
+  print("This driver is actually alive: {0}".format(i))
+  for request in data["requests"]:
+    print("Executing Request "+str(request['id'])+": {0}".format(i))
+    r = requests.get(request['url'], headers=request['header'], json=request['data'])    
+    print("Printing Response "+str(request['id'])+": {0}".format(r.json()))  
+  
+  timer = request['timer']
+  print("Pause time is: {0}".format(timer))
+  time.sleep(timer)
+  i += 1
