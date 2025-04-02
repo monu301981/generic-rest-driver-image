@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mock-rest:
+    # will build ./docker/rest/Dockerfile.rest
+    container_name: generic-rest-driver-image
+    build:
+        context: .
+        dockerfile: ./docker/rest/Dockerfile.rest
+  mock-grpc:
+    # will build ./docker/grpc/Dockerfile.grpc
+    container_name: generic-grpc-driver-image
+    build:
+        context: .
+        dockerfile: ./docker/grpc/Dockerfile.grpc
