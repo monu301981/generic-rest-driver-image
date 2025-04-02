@@ -10,7 +10,7 @@ This is a simple application which can be used for creating a simulator for Rest
 - Run the bat file, > mockstart 
 - On linux or mac, run the commands written in mockstart.bat or convert it into .sh file and run. 
 - The application starts and start sending sample request to the required end points.
-- 
+  
 ## Adding services:
 - Open requests.json file. 
 - Add the request url, header and payload in the correct json format. 
