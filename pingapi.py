@@ -2,7 +2,7 @@ import json
 import requests
 import time
   
-with open('config.json', 'r') as json_file:
+with open('requests.json', 'r') as json_file:
   data = json.load(json_file);
   #print(requests)
 for request in data["requests"]:

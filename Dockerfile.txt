@@ -1,0 +1,45 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+RUN pip install requests
+
+RUN apt-get update && apt-get -y install cron vim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the local directory contents into the container at /app
+COPY . /app
+
+# Creating Working 
+WORKDIR /py_cronjob
+
+# Copying the crontab file 
+COPY crontab /etc/cron.d/crontab
+
+# Copy the each file from docker_py_project to py_cronjob in docker container
+ADD . /py_cronjob
+
+RUN chmod 0644 /etc/cron.d/crontab
+
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+
+# Symlink the cron to stdout
+RUN ln -sf /dev/stdout /var/log/cron.log
+
+# run the crontab file
+RUN crontab /etc/cron.d/crontab
+
+# Run the command on container startup
+CMD cron && tail -F /var/log/cron.log 2>&1
+
+# Executing crontab command
+# CMD ["cron", "-f"]
+
+# Run Python script when the container launches
+# CMD ["python", "pingapi.py"]
+
+# docker build -t my-python-image .
+# docker run -v .:/app my-python-image
+# https://github.com/adiii717/docker-python-cronjob/tree/master
